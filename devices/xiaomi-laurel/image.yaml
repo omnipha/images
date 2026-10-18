@@ -1,0 +1,19 @@
+device: xiaomi-laurel
+soc: sm6125
+kernel:
+  repo: omnipha/linux-sm61x5
+  branch: omnipha
+profile: server
+packages:
+  - device-xiaomi-laurel        # omnipha/ports variant with deviceinfo_drm
+  - linux-nura-qcom-sm61x5      # pinned to omnipha/linux-sm61x5
+  - openssh
+  - rmtfs
+  - tqftpserv
+  - qrtr
+firmware:
+  source: extracted-from-device   # see ports/devices/xiaomi-laurel/firmware
+  free: [ath10k-firmware, a630-sqe]
+flash:
+  method: fastboot
+  partitions: [boot, userdata]

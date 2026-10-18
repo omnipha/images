@@ -1,0 +1,15 @@
+name: Build device images
+on:
+  push:
+    tags: ['device/**']
+  workflow_dispatch:
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        device: [xiaomi-laurel]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build image (placeholder until builder CI mode lands)
+        run: echo "TODO: omnipha/builder --non-interactive --profile server --ssh-pubkey $BUILD_KEY devices/${{ matrix.device }}/image.yaml"
