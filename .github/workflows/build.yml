@@ -1,23 +1,36 @@
-name: Build device images
+name: Validate image definitions
 on:
   push:
     tags: ['device/**']
   workflow_dispatch:
+
+concurrency:
+  group: build-${{ github.ref }}
+  cancel-in-progress: false
+
 jobs:
   build:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
         device: [xiaomi-laurel, nothing-asteroids]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: omnipha/ports
+          ref: 0633617cd90dfdc12fb8a8941c4ad0dddad36d3b
+          path: _ports
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
       - run: pip install pyyaml
-      - name: Validate image definition (non-interactive)
-        run: python3 tools/check-image.py "devices/${{ matrix.device }}/image.yaml"
-      - name: Build image (placeholder until builder CI mode lands)
+      - name: Validate image definition (non-interactive, against pinned omnipha/ports)
         run: >
-          echo "TODO: omnipha/builder --non-interactive --profile server
-          --ssh-pubkey $BUILD_KEY devices/${{ matrix.device }}/image.yaml"
+          python3 tools/check-image.py --ports _ports
+          "devices/${{ matrix.device }}/image.yaml"
+      - name: Image build unavailable (builder CI mode not implemented)
+        run: >
+          echo "BLOCKED: omnipha/builder lacks --non-interactive, --profile,
+          --ssh-pubkey and image.yaml support; no image was built"
