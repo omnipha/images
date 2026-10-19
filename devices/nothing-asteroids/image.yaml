@@ -1,0 +1,27 @@
+device: nothing-asteroids
+soc: sm7635
+kernel:
+  repo: NothingOSS/android_kernel_msm-6.1_nothing_sm7635
+  branch: sm7635/v/mr
+  commit: d5f5f965fd0b478eaf4eb63fd984c5a4a92135a7   # pinned per omnipha/linux-sm7635 source policy
+profile: server
+packages:
+  - device-nothing-asteroids        # omnipha/ports device package
+  - linux-omnipha-nothing-sm7635    # pinned to the commit above
+  - openssh
+  - rmtfs
+  - tqftpserv
+  - qrtr
+firmware:
+  source: extracted-from-device   # see ports/devices/nothing-asteroids/firmware; blobs never committed
+  free: []
+flash:
+  method: fastboot
+  header_version: 4
+  pagesize: 4096
+  slots: ab
+  partitions: [boot, vendor_boot, dtbo, vbmeta, userdata]   # slot-aware boot/vendor_boot/dtbo/vbmeta; userdata un-slotted
+  vbmeta: disable-verification
+  userdata:
+    filesystem: f2fs
+    encryption: metadata   # wrapped-key metadata encryption, stock layout

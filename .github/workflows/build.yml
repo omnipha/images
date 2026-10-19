@@ -8,9 +8,15 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        device: [xiaomi-laurel]
+        device: [xiaomi-laurel, nothing-asteroids]
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: pip install pyyaml
+      - name: Validate image definition (non-interactive)
+        run: python3 tools/check-image.py "devices/${{ matrix.device }}/image.yaml"
       - name: Build image (placeholder until builder CI mode lands)
         run: >
           echo "TODO: omnipha/builder --non-interactive --profile server
