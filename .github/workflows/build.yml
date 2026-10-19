@@ -12,4 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - name: Build image (placeholder until builder CI mode lands)
-        run: echo "TODO: omnipha/builder --non-interactive --profile server --ssh-pubkey $BUILD_KEY devices/${{ matrix.device }}/image.yaml"
+        run: >
+          echo "TODO: omnipha/builder --non-interactive --profile server
+          --ssh-pubkey $BUILD_KEY devices/${{ matrix.device }}/image.yaml"
