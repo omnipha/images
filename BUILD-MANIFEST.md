@@ -29,7 +29,10 @@ named release owner. See [the ports contribution contract](https://github.com/om
 
 Never execute `image.yaml` partition metadata as a flashing procedure.
 Nothing Phone (3a) Pro uses header-v4 A/B boot chains, and experimental
-partition metadata is not a verified install recipe. No GitHub Action here
+partition metadata is not a verified install recipe. The OnePlus 8 Pro
+definition only repeats fields the upstream pmaports `deviceinfo` states
+(fastboot, header v2, 4096-byte pages, `dtbo` and `super` partitions); it does
+not assert slot layout and is likewise not an install recipe. No GitHub Action here
 may publish releases until the builder runs noninteractively and produces a
 verifiable manifest and images. Tracked blockers: [builder#1](https://github.com/omnipha/builder/issues/1)
 and [nothing image#1](https://github.com/omnipha/images/issues/1).

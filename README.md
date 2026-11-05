@@ -22,8 +22,9 @@ must link a SHA-256-verified artifact, manifest and device-specific rollback.
 
 ## Status
 First planned build target: xiaomi-laurel (server profile). Nothing-asteroids
-has an experimental definition and no successful Omnipha boot. Both remain
-`unreleased` in `ports`. Builder's noninteractive CI mode is still blocked
+and oneplus-instantnoodlep have experimental definitions and no successful
+Omnipha boot; the OnePlus definition is untested and is not a flashing recipe.
+All remain `unreleased` in `ports`. Builder's noninteractive CI mode is still blocked
 (see [builder#1](https://github.com/omnipha/builder/issues/1)). A green
 "Validate image definitions" workflow does **not** make an image.
 
