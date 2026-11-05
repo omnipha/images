@@ -14,13 +14,13 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        device: [xiaomi-laurel, nothing-asteroids]
+        device: [xiaomi-laurel, nothing-asteroids, oneplus-instantnoodlep]
     steps:
       - uses: actions/checkout@v4
       - uses: actions/checkout@v4
         with:
           repository: omnipha/ports
-          ref: 0633617cd90dfdc12fb8a8941c4ad0dddad36d3b
+          ref: 7d581e7b2cd8833871f7669c6dcfa5df34effba3
           path: _ports
       - uses: actions/setup-python@v5
         with:

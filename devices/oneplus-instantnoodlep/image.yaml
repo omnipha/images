@@ -1,0 +1,30 @@
+# EXPERIMENTAL METADATA ONLY. Untested: no image has been built, flashed or booted
+# for this definition, and nothing here claims USB networking or SSH works.
+# Not a flashing recipe; see BUILD-MANIFEST.md.
+device: oneplus-instantnoodlep
+soc: sm8250
+kernel:
+  repo: https://gitlab.postmarketos.org/soc/qualcomm-sm8250/linux   # upstream mainline SM8250 fork (not an Omnipha kernel tree)
+  tag: sm8250-7.2.0_git20261010                                      # the pin: tag used by pmaports linux-postmarketos-qcom-sm8250 7.2.0_git20261010-r0
+  commit: 3c5440e9dd3c3e3b5735ad8f1b22bdfd02c707d9                   # full object the tag resolved to on 2026-11-05 (git ls-remote)
+  branch: 7.2.0-dev                                                  # moving branch whose tip matched the commit when checked; NOT the pin
+profile: server
+packages:
+  - device-oneplus-instantnoodlep   # omnipha/ports devices/oneplus-instantnoodlep (ports c623e0a, pkgver 7-r0)
+  - linux-postmarketos-qcom-sm8250  # =7.2.0_git20261010-r0; not provided by omnipha/ports, builder must supply it
+  - openssh
+  - rmtfs
+  - tqftpserv
+  - qrtr
+firmware:
+  source: extracted-from-device   # see ports/devices/oneplus-instantnoodlep/README.md; blobs never committed
+  free: []
+flash:
+  # Upstream pmaports deviceinfo (omnipha/pmaports-mirror dfb010f, device-oneplus-instantnoodlep):
+  # flash_method=fastboot, header_version=2, pagesize=4096, dtbo partition=dtbo, rootfs partition=super.
+  # "boot" is listed only because the validator requires it; slot handling is not stated upstream
+  # and is deliberately not asserted. Never execute this as a flash procedure.
+  method: fastboot
+  header_version: 2
+  pagesize: 4096
+  partitions: [boot, dtbo, super]
